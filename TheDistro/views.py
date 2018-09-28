@@ -1,3 +1,11 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 
-# Create your views here.
+
+def post_data(request):
+    
+    data = request.POST
+    
+    print(data)
+    
+    return JsonResponse(data)

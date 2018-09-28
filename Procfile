@@ -1,2 +1,1 @@
-web: python manage.py runserver
-
+web: daphne websocket_endpoint.asgi:application --port $PORT --bind 0.0.0.0 -v2

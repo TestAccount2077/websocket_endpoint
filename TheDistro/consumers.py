@@ -62,10 +62,7 @@ class TheDistroConsumer(AsyncWebsocketConsumer):
             'Data',
 
             {
-                'type': 'chat_event',
-                'data': {
-                    'Total revenue': 300
-                }
+                'Total revenue': 300
             }
         )
 

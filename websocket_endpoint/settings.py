@@ -15,6 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -37,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'channels',
+    'TheDistro',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +72,23 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'websocket_endpoint.wsgi.application'
+
+# Channels
+import channels_redis
+
+ASGI_APPLICATION = 'websocket_endpoint.routing.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [
+                'redis://h:p07bfeb69df1c1477030809aae0a4da992fc7a53f323197f569bccaea391006a7@ec2-35-174-88-224.compute-1.amazonaws.com:56369'
+                #'redis://localhost:6379'
+            ],
+        },
+    },
+}
 
 
 # Database
@@ -118,3 +139,23 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+if DEBUG:
+
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+    
+    
+# Used for static and media file storage in production
+else:
+    
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config()
+
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    ALLOWED_HOSTS = ['*']

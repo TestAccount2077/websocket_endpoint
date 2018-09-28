@@ -6,6 +6,20 @@ from .models import Data
 
 import json
 
+def get_data(request):
+    
+    data = Data.objects.filter(id=1)
+    
+    if data.exists():
+        data = data.first().as_dict()
+        
+    else:
+        data = {}
+    
+    return JsonResponse({
+        'data': data
+    })
+
 @csrf_exempt
 def post_data(request):
     

@@ -12,11 +12,11 @@ class Data(models.Model):
         
         revenue_items = eval(self.revenue_items)
         
-        return sum([item['cost'] for item in revenue_items])
+        return sum([item['balance_change'] for item in revenue_items])
     
     @property
     def total_expenses(self):
         
         expense_items = eval(self.expense_items)
         
-        return sum([item['cost'] for item in expense_items])
+        return sum([item['balance_change'] for item in expense_items])

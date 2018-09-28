@@ -1,5 +1,8 @@
 from django.db import models
 
+import json
+
+
 class Data(models.Model):
     
     revenue_items = models.TextField()
@@ -20,3 +23,15 @@ class Data(models.Model):
         expense_items = eval(self.expense_items)
         
         return sum([item['balance_change'] for item in expense_items])
+    
+    def as_dict(self):
+        
+        return json.dumps({
+            
+            'revenue_items': eval(self.revenue_items),
+            'expense_items': eval(self.expense_items),
+            'order_percentages': eval(self.order_percentages),
+            'total_revenue': self.total_revenue,
+            'total_expenses': self.total_expenses
+            
+        })

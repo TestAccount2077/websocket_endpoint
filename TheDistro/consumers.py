@@ -62,13 +62,16 @@ class TheDistroConsumer(AsyncWebsocketConsumer):
             'Data',
 
             {
-                'Total revenue': 300
+                'type': 'data_retrieve',
+                'data': {
+                    'Total revenue': 300
+                }
             }
         )
 
     
     # Handles Chat messages
-    async def chat_event(self, event):
+    async def data_retrieve(self, event):
         # Send message to WebSocket
         await self.send(text_data=json.dumps(event))
 

@@ -1,21 +1,9 @@
-import re
-import json
-import logging
-
-from channels.db import database_sync_to_async
-from django.contrib.auth import get_user_model
-from django.shortcuts import get_object_or_404
-from django.db.models import Q
-
-log = logging.getLogger(__name__)
-
-User = get_user_model()
-
-
 from django.contrib.auth import get_user_model
 
-from asgiref.sync import async_to_sync
 from channels.generic.websocket import AsyncWebsocketConsumer
+
+from . import utils
+
 import json
 
 #from . import utils
@@ -53,9 +41,7 @@ class TheDistroConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         
         data = json.loads(text_data)
-        
-        print(data)
-        
+                
         # Send message to room
         await self.channel_layer.group_send(
 
@@ -63,9 +49,7 @@ class TheDistroConsumer(AsyncWebsocketConsumer):
 
             {
                 'type': 'data_retrieve',
-                'data': {
-                    'Total revenue': 300
-                }
+                'data': utils.get_data()
             }
         )
 

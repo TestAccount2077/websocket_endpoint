@@ -3,18 +3,13 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import Data
+from . import utils
 
 import json
 
 def get_data(request):
     
-    data = Data.objects.filter(id=1)
-    
-    if data.exists():
-        data = data.first().as_dict()
-        
-    else:
-        data = {}
+    data = utils.get_data()
     
     return JsonResponse({
         'data': data

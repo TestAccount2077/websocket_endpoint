@@ -26,7 +26,7 @@ class Data(models.Model):
     
     def as_dict(self):
         
-        return json.dumps({
+        return {
             
             'revenue_items': eval(self.revenue_items),
             'expense_items': eval(self.expense_items),
@@ -34,4 +34,4 @@ class Data(models.Model):
             'total_revenue': self.total_revenue,
             'total_expenses': self.total_expenses
             
-        })
+        }

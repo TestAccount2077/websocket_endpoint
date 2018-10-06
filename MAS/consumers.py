@@ -58,28 +58,3 @@ class MasConsumer(AsyncWebsocketConsumer):
     async def data_retrieve(self, event):
         # Send message to WebSocket
         await self.send(text_data=json.dumps(event))
-
-    # Handle Specific messages event E.g , Message sent/ Read
-    async def message_event(self, event):
-        # Send message to WebSocket
-        await self.send(text_data=json.dumps(event))
-
-    async def fetch_message_event(self, event):
-        # Send message to WebSocket
-        await self.send(text_data=json.dumps(event))
-
-    # Handles user is typing
-    async def is_typing(self, event):
-        # Send message to WebSocket
-        await self.send(text_data=json.dumps(event))
-
-    # Handles status change
-    async def status_event(self, event):
-        # Send message to WebSocket
-        await self.send(text_data=json.dumps(event))
-
-    # Handles attachment
-    async def attachment_event(self, event):
-        # Send message to WebSocket
-        await self.send(text_data=json.dumps(event))
-

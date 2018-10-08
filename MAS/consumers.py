@@ -39,9 +39,7 @@ class MasConsumer(AsyncWebsocketConsumer):
 
     # Receive message from WebSocket
     async def receive(self, text_data):
-        
-        data = json.loads(text_data)
-                
+                        
         # Send message to room
         await self.channel_layer.group_send(
 
@@ -49,10 +47,9 @@ class MasConsumer(AsyncWebsocketConsumer):
 
             {
                 'type': 'data_retrieve',
-                'data': utils.get_data()
+                'data': data
             }
         )
-
     
     # Handles Chat messages
     async def data_retrieve(self, event):

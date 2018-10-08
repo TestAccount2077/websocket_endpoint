@@ -47,7 +47,7 @@ class MasConsumer(AsyncWebsocketConsumer):
 
             {
                 'type': 'data_retrieve',
-                'data': data
+                'data': text_data
             }
         )
     

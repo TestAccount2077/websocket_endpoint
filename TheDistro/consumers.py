@@ -41,6 +41,8 @@ class TheDistroConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         
         data = json.loads(text_data)
+        
+        print(data['query'])
                 
         # Send message to room
         await self.channel_layer.group_send(
@@ -49,7 +51,7 @@ class TheDistroConsumer(AsyncWebsocketConsumer):
 
             {
                 'type': 'data_retrieve',
-                'data': utils.get_data()
+                'data': utils.get_data(data['query'])
             }
         )
 

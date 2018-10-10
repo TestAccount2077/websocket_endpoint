@@ -24,7 +24,16 @@ class Data(models.Model):
         
         return sum([item['balance_change'] for item in expense_items])
     
-    def as_dict(self):
+    def as_dict(self, query=None):
+        
+        if query == 'daily-expenses':
+            
+            return {
+                'revenue_items': eval(self.revenue_items),
+                'expense_items': eval(self.expense_items),
+                'total_revenue': self.total_revenue,
+                'total_expenses': self.total_expenses
+            }
         
         return {
             

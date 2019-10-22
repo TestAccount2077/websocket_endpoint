@@ -2,7 +2,7 @@ dj-database-url==0.4.2
 Django==1.11.21
 gunicorn==19.7.1
 whitenoise==3.3.0
-Pillow==3.3.1
+Pillow==6.2.0
 pendulum==1.4.1
 channels==2.0.2
 channels_redis==2.0.2
